@@ -115,7 +115,8 @@ export async function loadConversationsSeries(
     .select('created_at, sender_type')
     .gte('created_at', start)
     .order('created_at', { ascending: true })
-  if (error) throw error
+  // PostgrestError is not an Error instance, so the dev overlay prints it as {}.
+  if (error) throw new Error(`messages query failed: ${error.message} (${error.code})`)
 
   const keys = lastNDayKeys(rangeDays)
   const buckets = new Map<string, { incoming: number; outgoing: number }>()

@@ -1,3 +1,6 @@
+-- Supabase puts uuid-ossp in the "extensions" schema; see 001_initial_schema.sql.
+SET search_path TO public, extensions;
+
 -- ============================================================
 -- 006_automations.sql — Automations feature
 --

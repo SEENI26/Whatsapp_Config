@@ -6,6 +6,9 @@
 
 -- Enable UUID extension
 CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+-- Supabase installs uuid-ossp into the "extensions" schema, which is not on
+-- the default search_path for migrations. Without this, uuid_generate_v4() is not found.
+SET search_path TO public, extensions;
 
 -- ============================================================
 -- PROFILES
